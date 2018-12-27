@@ -11,7 +11,7 @@
 		<div :key="wether.id">
 			{{wether.currently}}
 			<br>
-			{{(wether.currently.temperature - 32) * 5/9  }}
+			{{((wether.currently.temperature - 32) * 5/9).toFixed(1)}}
 		</div>	
 	</div>
 </template>
@@ -48,7 +48,6 @@
 		    console.log('created1')
 		    this.resource.get().then(response => response.json())
 		          .then(wether => this.wether = wether);
-		         
 		}
 	}
 </script>
