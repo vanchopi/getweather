@@ -7,17 +7,18 @@
           </div>
           <input type="search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
         </div>  
+      </div>  
+      <div class="row">
+        <router-link 
+        tag="button"
+        class="btn  btn-info"
+        :to="{name: 'forecast',  query: {latitude: 47, longitude: 39.7}}">Full forecast</router-link>
       </div>
-      <div class="mb-3">
-        <div class="row">
-          <button type="button" class="btn btn-primary">Get</button>
-        </div>  
-      </div>
-      <router-link 
-      tag="button"
-      class="btn  btn-info"
-      :to="{name: 'forecast', params: {id: id}, query: {latitude: 47, longitude: 39.7}}">Full forecast</router-link>
-      <router-view></router-view> 
+      <div class="row">
+        <router-view></router-view> 
+      </div>  
+
+
   </div>
 </template>
 

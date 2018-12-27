@@ -8,8 +8,10 @@
 				longitude: {{ $route.query.longitude }}
 			</span>
 		</div>
-		<div>
-			temperature {{ wether.currently.temperature }}
+		<div :key="wether.id">
+			{{wether.currently}}
+			<br>
+			{{(wether.currently.temperature - 32) * 5/9  }}
 		</div>	
 	</div>
 </template>
@@ -24,20 +26,24 @@
 		    }
 		},
 		methods:{
-		    getData(){
+		    /*getData(){
 		      this.resource.get().then(response => response.json())
 		          .then(wether => this.wether = wether);
 		          console.log()      
-		    }
+		    }*/
+		},
+		computed:{
+
 		},
 		created(){
 			const latitude = this.$route.query.latitude;
 			const longitude = this.$route.query.longitude;
 			var str = latitude + ',' + longitude;
 		    this.resource = this.$resource(str);
+		    console.log('created1')
 		    this.resource.get().then(response => response.json())
 		          .then(wether => this.wether = wether);
-		          console.log() 
+		         
 		}
 	}
 </script>
