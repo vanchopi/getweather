@@ -10,33 +10,21 @@
       </div>
       <div class="mb-3">
         <div class="row">
-          <button type="button" class="btn btn-primary" @click="getData">Get</button>
+          <button type="button" class="btn btn-primary">Get</button>
         </div>  
       </div>
-      <span>
-        {{wether}}
-      </span>
+      <router-link 
+      tag="button"
+      class="btn  btn-info"
+      :to="{name: 'forecast', params: {id: id}, query: {latitude: 47, longitude: 39.7}}">Full forecast</router-link>
+      <router-view></router-view> 
   </div>
 </template>
 
 <script type="text/javascript">
 export default {
   
-  data () {
-    return {
-      name: '',
-      wether: []
-    }
-  },
-  methods:{
-    getData(){
-      this.resource.get().then(response => response.json())
-          .then(wether => this.wether = wether)      
-    }
-  },
-  created(){
-    this.resource = this.$resource('42.3601,-71.0589')
-  }
+  
 }
 </script>
 
