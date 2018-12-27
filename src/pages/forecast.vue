@@ -21,7 +21,12 @@
 		data () {
 		    return {
 		      name: '',
-		      wether: [],
+		      //wether: [],
+		      wether: {
+		      	currently: {
+		      		temperature: 0
+		      	}
+		      },
 		      resource: null
 		    }
 		},
