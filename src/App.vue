@@ -5,7 +5,14 @@
           <div class="input-group-prepend">
             <span class="input-group-text" id="inputGroup-sizing-default">City</span>
           </div>
-          <input type="search" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+          <input 
+          type="search" 
+          class="form-control" 
+          aria-label="Sizing example input" 
+          aria-describedby="inputGroup-sizing-default"
+          id="city"
+          v-model="city"
+          >
         </div>  
       </div>  
       <div class="row pb-3">
@@ -43,7 +50,8 @@
         </div>
       </div>
       <hr>
-
+      <button class="btn btn-success" @click="getCoordinates">Coords</button>
+      <span>{{cityCoords.latLng }}</span>
       <hr>
       <div class="row">
         <div class="col-md-12">
@@ -60,7 +68,35 @@ export default {
   data(){
     return{
       latitude: 0,
-      longitude:0
+      longitude:0,
+      cityCoords:{        
+        results: [
+          {              
+            "locations": [
+              {                  
+                "latLng": {
+                  lat: 0,
+                  lng: 0
+                }
+              }
+            ]
+          }
+        ]
+      }
+      ,
+      city: ''
+    }
+  },
+  methods:{
+    getCoordinates(){
+      var cityName = 'http://open.mapquestapi.com/geocoding/v1/address?key=F9rFHk242FvWMVGiNgGhP7KgTkkbSAJL&location=Rostov+on+don'
+      this.$http.get(cityName)
+        .then(response => {
+          return response.json()
+         })
+         .then(cityCoords => {
+          this.cityCoords = cityCoords// наш пустой массив
+         })
     }
   }
   
