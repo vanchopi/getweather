@@ -50,8 +50,9 @@
         </div>
       </div>
       <hr>
-      <button class="btn btn-success" @click="getCoordinates">Coords</button>
-      <span>{{cityCoords.latLng }}</span>
+      <button class="btn btn-success" @click="getCoordinates(city)">Coords</button>
+      <br>
+      <span>{{cityCoords.results[0].locations[0].latLng}}</span>
       <hr>
       <div class="row">
         <div class="col-md-12">
@@ -71,12 +72,15 @@ export default {
       longitude:0,
       cityCoords:{        
         results: [
-          {              
-            "locations": [
+          {  
+            providedLocation: {
+              location: "Rostov on don"
+            },            
+            locations: [
               {                  
-                "latLng": {
-                  lat: 0,
-                  lng: 0
+                latLng: {
+                  lat: 5,
+                  lng: 5
                 }
               }
             ]
@@ -88,15 +92,22 @@ export default {
     }
   },
   methods:{
-    getCoordinates(){
-      var cityName = 'http://open.mapquestapi.com/geocoding/v1/address?key=F9rFHk242FvWMVGiNgGhP7KgTkkbSAJL&location=Rostov+on+don'
-      this.$http.get(cityName)
+    getCoordinates(val){
+      console.log(val);
+      var cityName = 'http://open.mapquestapi.com/geocoding/v1/address?key=F9rFHk242FvWMVGiNgGhP7KgTkkbSAJL&location=' + val;
+      const self = this;
+      self.$http.get(cityName)
         .then(response => {
           return response.json()
          })
          .then(cityCoords => {
-          this.cityCoords = cityCoords// наш пустой массив
+          self.cityCoords = cityCoords// наш пустой массив;
+          self.latitude = self.cityCoords.results[0].locations[0].latLng.lat;
+          self.longitude = self.cityCoords.results[0].locations[0].latLng.lng;
+        console.log(self.cityCoords);
          })
+
+         
     }
   }
   
