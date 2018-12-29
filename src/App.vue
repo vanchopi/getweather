@@ -43,14 +43,14 @@
       </div>
       <div class="row">
         <div class="col-md-2">
-        <router-link 
+        <!--<router-link 
         tag="button"
         class="btn  btn-info"
-        :to="{name: 'forecast',  query: {latitude: latitude, longitude: longitude}}">Full forecast</router-link>
+        :to="{name: 'forecast',  query: {latitude: latitude, longitude: longitude}}">Full forecast</router-link>-->
         </div>
       </div>
       <hr>
-      <button class="btn btn-success" @click="getCoordinates(city)">Coords</button>
+      <button class="btn btn-success" @click="getCoordinates(city)">Get forecast</button>
       <br>
       <span>{{cityCoords.results[0].locations[0].latLng}}</span>
       <hr>
@@ -104,7 +104,7 @@ export default {
           self.cityCoords = cityCoords// наш пустой массив;
           self.latitude = self.cityCoords.results[0].locations[0].latLng.lat;
           self.longitude = self.cityCoords.results[0].locations[0].latLng.lng;
-        console.log(self.cityCoords);
+          this.$router.push({name: 'forecast', query:{latitude: this.latitude, longitude: this.longitude}})
          })
 
          
