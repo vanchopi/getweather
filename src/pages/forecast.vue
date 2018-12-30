@@ -40,13 +40,8 @@
 			    this.resource.get().then(response => response.json())
 			        .then(wether => {
 			          	this.wether = wether
-			          	console.log('parasha');
 			        });
-		        console.log('govno');
 		    }
-		},
-		computed:{
-
 		},
 		watch:{
 			'$route'(){
