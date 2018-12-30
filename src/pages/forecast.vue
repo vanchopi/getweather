@@ -31,23 +31,30 @@
 		    }
 		},
 		methods:{
-		    /*getData(){
-		      this.resource.get().then(response => response.json())
-		          .then(wether => this.wether = wether);
-		          console.log()      
-		    }*/
+		    getForecastComponent(){
+		    	const latitude = this.$route.query.latitude;
+				const longitude = this.$route.query.longitude;
+				var str = latitude + ',' + longitude;
+			    this.resource = this.$resource(str);
+			    console.log('created1')
+			    this.resource.get().then(response => response.json())
+			        .then(wether => {
+			          	this.wether = wether
+			          	console.log('parasha');
+			        });
+		        console.log('govno');
+		    }
 		},
 		computed:{
 
 		},
-		created(){
-			const latitude = this.$route.query.latitude;
-			const longitude = this.$route.query.longitude;
-			var str = latitude + ',' + longitude;
-		    this.resource = this.$resource(str);
-		    console.log('created1')
-		    this.resource.get().then(response => response.json())
-		          .then(wether => this.wether = wether);
+		watch:{
+			'$route'(){
+		    	this.getForecastComponent()
+		    } 
+		},
+		created(){			
+			this.getForecastComponent();
 		}
 	}
 </script>
