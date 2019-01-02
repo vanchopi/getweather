@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<img v-attr="src :">
+		<img :src="wetherIconName">
 		<div>
 			<span>
 				latitude: {{ $route.query.latitude }}
@@ -49,6 +49,7 @@
 		    	const latitude = this.$route.query.latitude;
 				const longitude = this.$route.query.longitude;
 				var str = latitude + ',' + longitude;
+				var imgPath = "/src/assets/images/wether-icons/"
 			    this.resource = this.$resource(str);
 			    console.log('created1')
 			    this.resource.get().then(response => response.json())
@@ -56,7 +57,8 @@
 			          	this.wether = wether;
 			          	for (var i = 0; i < wetherList.length - 1; i ++ ){
 				          		if (wetherList[i] == this.wether.currently.icon){
-				          			console.log('icon - ',wetherList[i] + i)
+				          			console.log('icon - ',wetherList[i] + i);
+				          			this.wetherIconName = imgPath + wetherList[i] + '.png';
 				          		}				          		
 				          	}
 			          	console.log(this.wether.currently.icon)
