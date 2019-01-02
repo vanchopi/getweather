@@ -1,67 +1,73 @@
 <template>
-  <div class="container pt-5">      
-      <div class="row">
-        <div class="input-group mb-3 col-md-12">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="inputGroup-sizing-default">City</span>
-          </div>
-          <input 
-          type="search" 
-          class="form-control" 
-          aria-label="Sizing example input" 
-          aria-describedby="inputGroup-sizing-default"
-          id="city"
-          v-model="city"
-          >
+  <div class="int-cont">
+    <div class="container pt-5">      
+        <div class="row">
+          <div class="input-group mb-3 col-md-12">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="inputGroup-sizing-default">City</span>
+            </div>
+            <input 
+            type="search" 
+            class="form-control" 
+            aria-label="Sizing example input" 
+            aria-describedby="inputGroup-sizing-default"
+            id="city"
+            v-model="city"
+            >
+          </div>  
         </div>  
-      </div>  
-      <div class="row pb-3">
-        <div class="input-group col-md-6">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="latitude">latitude</span>
+        <div class="hidden">
+          <div class="input-group col-md-6">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="latitude">latitude</span>
+            </div>
+            <input 
+            type="text" 
+            class="form-control" 
+            aria-label="latitude" 
+            aria-describedby="basic-addon1"
+            v-model.lazy.number="latitude"
+            >
           </div>
-          <input 
-          type="text" 
-          class="form-control" 
-          aria-label="latitude" 
-          aria-describedby="basic-addon1"
-          v-model.lazy.number="latitude"
-          >
-        </div>
-        <div class="input-group col-md-6">
-          <div class="input-group-prepend">
-            <span class="input-group-text" id="longitude">longitude</span>
+          <div class="input-group col-md-6">
+            <div class="input-group-prepend">
+              <span class="input-group-text" id="longitude">longitude</span>
+            </div>
+            <input 
+            type="text" 
+            class="form-control" 
+            aria-label="longitude" 
+            aria-describedby="basic-addon1"
+            v-model.lazy.number="longitude"
+            >
           </div>
-          <input 
-          type="text" 
-          class="form-control" 
-          aria-label="longitude" 
-          aria-describedby="basic-addon1"
-          v-model.lazy.number="longitude"
-          >
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-2">
-        <!--<router-link 
-        tag="button"
-        class="btn  btn-info"
-        :to="{name: 'forecast',  query: {latitude: latitude, longitude: longitude}}">Full forecast</router-link>-->
-        </div>
-      </div>
-      <hr>
-      <button class="btn btn-success" @click="getCoordinates(city)">Get forecast</button>
-      <br>
-      <span>{{cityCoords.results[0].locations[0].latLng}}</span>
-      <hr>
-      <div class="row">
-        <div class="col-md-12">
-          <router-view></router-view> 
-        </div>
-      </div>  
+        <!--<div class="row">
+          <div class="col-md-2">
+          <router-link 
+          tag="button"
+          class="btn  btn-info"
+          :to="{name: 'forecast',  query: {latitude: latitude, longitude: longitude}}">Full forecast</router-link>
+          </div>
+        </div>-->
+        <hr>
+        <button class="btn btn-success" @click="getCoordinates(city)">Get forecast</button>
+        <!--<br>
+        <span>{{cityCoords.results[0].locations[0].latLng}}</span>
+        <hr>-->
+        <div class="row">
+          <div class="col-md-12">
+            <router-view></router-view> 
+          </div>
+        </div>  
 
 
-  </div>
+    </div>
+    <div class="bg-cont">
+          <div class="white-overlay">            
+          </div>
+      </div>
+  </div>  
 </template>
 
 <script type="text/javascript">
@@ -115,5 +121,40 @@ export default {
 </script>
 
 <style type="text/css" scoped>
+  .int-cont{
+    position: relative;
+    min-width: 100%;
+    min-height: 100vh;
+    height: 100%;
+    background-image: url('/src/assets/images/clouds.jpg'); 
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
 
+  .int-cont .container{
+    position: relative;
+    z-index: 10;
+  }
+
+  .int-cont .bg-cont {
+    width: 100%;
+    height: auto;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+  }
+  .int-cont .bg-cont .white-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: white;
+    opacity: 0.75;
+  }
+
+  .hidden{
+    display: none !important;
+  }
 </style>

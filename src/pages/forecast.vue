@@ -1,5 +1,6 @@
 <template>
 	<div>
+		<img v-attr="src :">
 		<div>
 			<span>
 				latitude: {{ $route.query.latitude }}
@@ -21,6 +22,7 @@
 		data () {
 		    return {
 		      name: '',
+		      wetherIconName:'',
 		      //wether: [],
 		      wether: {
 		      	currently: {
@@ -32,6 +34,18 @@
 		},
 		methods:{
 		    getForecastComponent(){
+		    	var wetherList = [ // listing of all possible icons
+	                "clear-day",
+	                "clear-night",
+	                "partly-cloudy-day",
+	                "partly-cloudy-night",
+	                "cloudy",
+	                "rain",
+	                "sleet",
+	                "snow",
+	                "wind",
+	                "fog"
+	            ];
 		    	const latitude = this.$route.query.latitude;
 				const longitude = this.$route.query.longitude;
 				var str = latitude + ',' + longitude;
@@ -39,7 +53,13 @@
 			    console.log('created1')
 			    this.resource.get().then(response => response.json())
 			        .then(wether => {
-			          	this.wether = wether
+			          	this.wether = wether;
+			          	for (var i = 0; i < wetherList.length - 1; i ++ ){
+				          		if (wetherList[i] == this.wether.currently.icon){
+				          			console.log('icon - ',wetherList[i] + i)
+				          		}				          		
+				          	}
+			          	console.log(this.wether.currently.icon)
 			        });
 		    }
 		},
