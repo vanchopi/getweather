@@ -1,7 +1,37 @@
 <template>
-	<div>
-		<img :src="wetherIconName">
-		<div>
+	<div class="row">
+		<div class="col-md-6 text-center">			
+			<img :src="wetherIconName">	
+		</div>
+		<div class="col-md-6" :key="wether.id">
+			<div class="wrapper">
+				<div class="data-cont">
+					<div class="data-list-cont">
+						<span class="data-name">t&#176;</span>
+						<span class="data">{{((wether.currently.temperature - 32) * 5/9).toFixed(1)}}c</span>
+					</div>
+					<div class="data-list-cont">
+						<span class="data-name">Summary:</span>
+						<span v-if="wether.minutely != void(0)" class="data">{{wether.minutely.summary}}</span>
+						<span v-else>{{wether.currently.summary}}</span>
+					</div>
+					<div class="data-list-cont">
+						<span class="data-name">Humidity:</span>
+						<span class="data">{{wether.currently.humidity}}</span>
+					</div>
+					<div class="data-list-cont">
+						<span class="data-name">Wind speed:</span>
+						<span class="data">{{(wether.currently.windSpeed*1.609).toFixed(1)}} km/h</span>
+					</div>
+					<div class="data-list-cont">
+						<span class="data-name">Pressure:</span>
+						<span class="data">{{(wether.currently.pressure/1.334).toFixed(1)}} mm. Hg.</span>
+					</div>
+				</div>
+			</div>	
+		</div>
+		
+		<!--<div>
 			<span>
 				latitude: {{ $route.query.latitude }}
 			</span>
@@ -9,11 +39,11 @@
 				longitude: {{ $route.query.longitude }}
 			</span>
 		</div>
-		<div :key="wether.id">
-			{{wether.currently}}
+		<div >
+			
 			<br>
 			{{((wether.currently.temperature - 32) * 5/9).toFixed(1)}}
-		</div>	
+		</div>	-->
 	</div>
 </template>
 
@@ -23,29 +53,24 @@
 		    return {
 		      name: '',
 		      wetherIconName:'',
-		      //wether: [],
 		      wether: {
 		      	currently: {
-		      		temperature: 0
+		      		summary:'',
+		      		humidity: 0,
+		      		windSpeed: 0,
+		      		temperature: 0,
+		      		pressure: 0
+		      	},
+		      	minutely:{
+		      		summary:''
 		      	}
 		      },
+		      wetherDay: {},
 		      resource: null
 		    }
 		},
 		methods:{
 		    getForecastComponent(){
-		    	var wetherList = [ // listing of all possible icons
-	                "clear-day",
-	                "clear-night",
-	                "partly-cloudy-day",
-	                "partly-cloudy-night",
-	                "cloudy",
-	                "rain",
-	                "sleet",
-	                "snow",
-	                "wind",
-	                "fog"
-	            ];
 		    	const latitude = this.$route.query.latitude;
 				const longitude = this.$route.query.longitude;
 				var str = latitude + ',' + longitude;
@@ -55,13 +80,9 @@
 			    this.resource.get().then(response => response.json())
 			        .then(wether => {
 			          	this.wether = wether;
-			          	for (var i = 0; i < wetherList.length - 1; i ++ ){
-				          		if (wetherList[i] == this.wether.currently.icon){
-				          			console.log('icon - ',wetherList[i] + i);
-				          			this.wetherIconName = imgPath + wetherList[i] + '.png';
-				          		}				          		
-				          	}
-			          	console.log(this.wether.currently.icon)
+				        this.wetherIconName = imgPath + this.wether.currently.icon + '.png';  
+				        this.wetherDay = this.wether.daily;
+				        console.log(this.wetherDay);
 			        });
 		    }
 		},
@@ -77,5 +98,12 @@
 </script>
 
 <style type="text/css" scoped>
-	
+	.wrapper{
+		display: flex;		
+		height: 100%;
+		width: 100%;
+	}
+	.data-cont{
+		margin: auto auto auto 0;
+	}
 </style>

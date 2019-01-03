@@ -50,15 +50,14 @@
           :to="{name: 'forecast',  query: {latitude: latitude, longitude: longitude}}">Full forecast</router-link>
           </div>
         </div>-->
-        <hr>
+        
         <button class="btn btn-success" @click="getCoordinates(city)">Get forecast</button>
+        <hr>
         <!--<br>
         <span>{{cityCoords.results[0].locations[0].latLng}}</span>
         <hr>-->
-        <div class="row">
-          <div class="col-md-12">
-            <router-view></router-view> 
-          </div>
+        <div class="forecastCont">          
+            <router-view></router-view>           
         </div>  
 
 
