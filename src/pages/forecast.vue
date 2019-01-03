@@ -1,50 +1,60 @@
 <template>
-	<div class="row">
-		<div class="col-md-6 text-center">			
-			<img :src="wetherIconName">	
+	<div>
+		<div 
+		class="preloader-cont"
+		:class="{'hidden': !hidden}"
+		>
+			<div class="preloader">
+				<img src="/src/assets/images/preloader.gif">
+			</div>
 		</div>
-		<div class="col-md-6" :key="wether.id">
-			<div class="wrapper">
-				<div class="data-cont">
-					<div class="data-list-cont">
-						<span class="data-name">t&#176;</span>
-						<span class="data">{{((wether.currently.temperature - 32) * 5/9).toFixed(1)}}c</span>
+		<div class="row">
+			<div class="col-md-6 text-center">			
+				<img :src="wetherIconName">	
+			</div>
+			<div class="col-md-6" :key="wether.id">
+				<div class="wrapper">
+					<div class="data-cont">
+						<div class="data-list-cont">
+							<span class="data-name">t&#176;</span>
+							<span class="data">{{((wether.currently.temperature - 32) * 5/9).toFixed(1)}}c</span>
+						</div>
+						<div class="data-list-cont">
+							<span class="data-name">Summary:</span>
+							<span v-if="wether.minutely != void(0)" class="data">{{wether.minutely.summary}}</span>
+							<span v-else>{{wether.currently.summary}}</span>
+						</div>
+						<div class="data-list-cont">
+							<span class="data-name">Humidity:</span>
+							<span class="data">{{wether.currently.humidity}}</span>
+						</div>
+						<div class="data-list-cont">
+							<span class="data-name">Wind speed:</span>
+							<span class="data">{{(wether.currently.windSpeed*1.609).toFixed(1)}} km/h</span>
+						</div>
+						<div class="data-list-cont">
+							<span class="data-name">Pressure:</span>
+							<span class="data">{{(wether.currently.pressure/1.334).toFixed(1)}} mm. Hg.</span>
+						</div>
 					</div>
-					<div class="data-list-cont">
-						<span class="data-name">Summary:</span>
-						<span v-if="wether.minutely != void(0)" class="data">{{wether.minutely.summary}}</span>
-						<span v-else>{{wether.currently.summary}}</span>
-					</div>
-					<div class="data-list-cont">
-						<span class="data-name">Humidity:</span>
-						<span class="data">{{wether.currently.humidity}}</span>
-					</div>
-					<div class="data-list-cont">
-						<span class="data-name">Wind speed:</span>
-						<span class="data">{{(wether.currently.windSpeed*1.609).toFixed(1)}} km/h</span>
-					</div>
-					<div class="data-list-cont">
-						<span class="data-name">Pressure:</span>
-						<span class="data">{{(wether.currently.pressure/1.334).toFixed(1)}} mm. Hg.</span>
-					</div>
-				</div>
-			</div>	
-		</div>
-		
-		<!--<div>
-			<span>
-				latitude: {{ $route.query.latitude }}
-			</span>
-			<span>
-				longitude: {{ $route.query.longitude }}
-			</span>
-		</div>
-		<div >
+				</div>	
+			</div>
 			
-			<br>
-			{{((wether.currently.temperature - 32) * 5/9).toFixed(1)}}
-		</div>	-->
-	</div>
+			<!--<div>
+				<span>
+					latitude: {{ $route.query.latitude }}
+				</span>
+				<span>
+					longitude: {{ $route.query.longitude }}
+				</span>
+			</div>
+			<div >
+				
+				<br>
+				{{((wether.currently.temperature - 32) * 5/9).toFixed(1)}}
+			</div>	-->
+		</div>
+	</div>	
 </template>
 
 <script type="text/javascript">
@@ -52,6 +62,7 @@
 		data () {
 		    return {
 		      name: '',
+		      hidden: false,
 		      wetherIconName:'',
 		      wether: {
 		      	currently: {
@@ -71,6 +82,7 @@
 		},
 		methods:{
 		    getForecastComponent(){
+		    	this.hidden = !this.hidden;
 		    	const latitude = this.$route.query.latitude;
 				const longitude = this.$route.query.longitude;
 				var str = latitude + ',' + longitude;
@@ -82,6 +94,7 @@
 			          	this.wether = wether;
 				        this.wetherIconName = imgPath + this.wether.currently.icon + '.png';  
 				        this.wetherDay = this.wether.daily;
+				        this.hidden = !this.hidden;
 				        console.log(this.wetherDay);
 			        });
 		    }
@@ -106,4 +119,25 @@
 	.data-cont{
 		margin: auto auto auto 0;
 	}
+	.preloader-cont{
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		z-index: 10;
+		/*background: white;
+    	opacity: 0.5;*/
+	}
+	.preloader-cont .preloader{
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		margin: auto;
+		width: 90px;
+		height: 90px;
+	}
+	.hidden{
+	    display: none !important;
+	 }
 </style>
