@@ -109,10 +109,15 @@ export default {
          })
          .then(cityCoords => {
           self.cityCoords = cityCoords// наш пустой массив;
-          self.cityStrName = self.cityCoords.results[0].locations[0].adminArea5 + ', ' + self.cityCoords.results[0].locations[0].adminArea3 + ', ' + self.cityCoords.results[0].locations[0].adminArea1;
-          self.latitude = self.cityCoords.results[0].locations[0].latLng.lat;
-          self.longitude = self.cityCoords.results[0].locations[0].latLng.lng;
-          this.$router.push({name: 'forecast', query:{latitude: this.latitude, longitude: this.longitude}})
+          if (self.cityCoords.results[0].locations[0].adminArea5 != ''){
+              self.cityStrName = self.cityCoords.results[0].locations[0].adminArea5 + ', ' + self.cityCoords.results[0].locations[0].adminArea3 + ', ' + self.cityCoords.results[0].locations[0].adminArea1;  
+              self.latitude = self.cityCoords.results[0].locations[0].latLng.lat;
+              self.longitude = self.cityCoords.results[0].locations[0].latLng.lng;
+              this.$router.push({name: 'forecast', query:{latitude: this.latitude, longitude: this.longitude}})
+            } else{
+              this.$router.push({name: '404'});
+              self.cityStrName = "Can't find city '" + this.city +"'";
+            }               
          })
 
          
