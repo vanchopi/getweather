@@ -52,6 +52,7 @@
         </div>-->
         
         <button class="btn btn-success" @click="getCoordinates(city)">Get forecast</button>
+        <span class="city-name">{{cityStrName}}</span>
         <hr>
         <!--<br>
         <span>{{cityCoords.results[0].locations[0].latLng}}</span>
@@ -75,6 +76,7 @@ export default {
     return{
       latitude: 0,
       longitude:0,
+      cityStrName: '',
       cityCoords:{        
         results: [
           {  
@@ -107,6 +109,7 @@ export default {
          })
          .then(cityCoords => {
           self.cityCoords = cityCoords// наш пустой массив;
+          self.cityStrName = self.cityCoords.results[0].locations[0].adminArea5 + ', ' + self.cityCoords.results[0].locations[0].adminArea3 + ', ' + self.cityCoords.results[0].locations[0].adminArea1;
           self.latitude = self.cityCoords.results[0].locations[0].latLng.lat;
           self.longitude = self.cityCoords.results[0].locations[0].latLng.lng;
           this.$router.push({name: 'forecast', query:{latitude: this.latitude, longitude: this.longitude}})
@@ -155,5 +158,9 @@ export default {
 
   .hidden{
     display: none !important;
+  }
+  .city-name{
+    float: right;
+    margin-top: 12px;
   }
 </style>
