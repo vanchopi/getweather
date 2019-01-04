@@ -16,26 +16,9 @@
 				<div class="wrapper">
 					<div class="data-cont">
 						<div class="data-list-cont">
-							<span class="data-name">t&#176;</span>
-							<span class="data">{{((wether.currently.temperature - 32) * 5/9).toFixed(1)}}c</span>
-						</div>
-						<div class="data-list-cont">
-							<span class="data-name">Summary:</span>
-							<span v-if="wether.minutely != void(0)" class="data">{{wether.minutely.summary}}</span>
-							<span v-else>{{wether.currently.summary}}</span>
-						</div>
-						<div class="data-list-cont">
-							<span class="data-name">Humidity:</span>
-							<span class="data">{{wether.currently.humidity}}</span>
-						</div>
-						<div class="data-list-cont">
-							<span class="data-name">Wind speed:</span>
-							<span class="data">{{(wether.currently.windSpeed*1.609).toFixed(1)}} km/h</span>
-						</div>
-						<div class="data-list-cont">
-							<span class="data-name">Pressure:</span>
-							<span class="data">{{(wether.currently.pressure/1.334).toFixed(1)}} mm. Hg.</span>
-						</div>
+							<span class="data-name __big">t&#176;</span>
+							<span class="data __big">{{((wether.currently.temperature - 32) * 5/9).toFixed(1)}}</span>
+						</div>						
 					</div>
 				</div>	
 			</div>
@@ -53,6 +36,49 @@
 				<br>
 				{{((wether.currently.temperature - 32) * 5/9).toFixed(1)}}
 			</div>	-->
+		</div>
+		<div class="row pt-3">
+			<div class="col-md-3">
+				<div class="wrapper-no-flex">
+					<div class="data-cont">
+						<div class="data-list-cont">
+							<div class="data-name">Summary</div>
+							<div v-if="wether.minutely != void(0)" class="data">{{wether.minutely.summary}}</div>
+							<div v-else class="data">{{wether.currently.summary}}</div>
+						</div>
+					</div>
+				</div>			
+			</div>
+			<div class="col-md-3">
+				<div class="wrapper-no-flex">
+					<div class="data-cont">
+						<div class="data-list-cont">
+							<div class="data-name">Humidity</div>
+							<div class="data">{{wether.currently.humidity}}</div>
+						</div>
+					</div>
+				</div>			
+			</div>
+			<div class="col-md-3">
+				<div class="wrapper-no-flex">
+					<div class="data-cont">
+						<div class="data-list-cont">
+							<div class="data-name">Wind speed</div>
+							<div class="data">{{(wether.currently.windSpeed*1.609).toFixed(1)}} km/h</div>
+						</div>
+					</div>
+				</div>			
+			</div>
+			<div class="col-md-3">
+				<div class="wrapper-no-flex">
+					<div class="data-cont">
+						<div class="data-list-cont">
+							<div class="data-name">Pressure</div>
+							<div class="data">{{(wether.currently.pressure/1.334).toFixed(1)}} mm. Hg.</div>
+						</div>
+					</div>
+				</div>			
+			</div>
 		</div>
 	</div>	
 </template>
@@ -116,8 +142,26 @@
 		height: 100%;
 		width: 100%;
 	}
+	.wrapper-no-flex{
+		display: block;		
+	}
+	.wrapper-no-flex .data-cont .data-list-cont{
+		color: #666666;
+	}
+	.wrapper-no-flex .data-cont .data-list-cont .data-name{
+		padding-bottom: 1rem;
+		border-bottom: 1px solid #c1c1c1;
+		text-align: center;
+		font-size: 21px;
+	}
+	.wrapper-no-flex .data-cont .data-list-cont .data{
+		padding-top: 1rem;
+		font-size: 16px;
+    	text-align: center;
+	}
 	.data-cont{
-		margin: auto auto auto 0;
+		/*margin: auto auto auto 0;*/
+		margin: auto;
 	}
 	.preloader-cont{
 		position: absolute;
@@ -139,5 +183,9 @@
 	}
 	.hidden{
 	    display: none !important;
+	 }
+	 .data-list-cont .data-name.__big,
+	 .data-list-cont .data.__big{
+	 	font-size: 80px;
 	 }
 </style>
