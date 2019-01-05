@@ -80,11 +80,41 @@
 				</div>			
 			</div>
 		</div>
-		<div class="row" id="daily">
-			{{wetherDay}}
 
-
-
+		
+		<div class="row daily pt-3" 
+		     v-for="(item, index) of forecast"
+		     >
+			<div class="col-md-4">
+				<div class="wrapper">
+					<div class="data-cont">
+						<div class="data-list-cont">
+							{{item[0].dayTime}}
+						</div>
+					</div>
+				</div>
+			</div>	
+			<div class="col-md-4">
+				<div class="wrapper">
+					<div class="data-cont">
+						<div class="data-list-cont">
+							<div class="img-small-cont">
+								<img :src="item[0].icon">	
+							</div>	
+						</div>
+					</div>
+				</div>
+			</div>	
+			<div class="col-md-4">
+				<div class="wrapper">
+					<div class="data-cont">
+						<div class="data-list-cont">
+							<span class="min">{{item[0].temperatureMin}} / </span>
+							<span class="max">{{item[0].temperatureMax}}</span>
+						</div>
+					</div>
+				</div>
+			</div>				
 		</div>
 	</div>	
 </template>
@@ -108,7 +138,32 @@
 		      		summary:''
 		      	}
 		      },
-		      forecast:{},		      
+		      forecast:[
+		      	[{
+		      		dayTime:'',icon:'',temperatureMin: 0,temperatureMax: 0			      			
+		      	}],
+		      	[{
+		      		dayTime:'',icon:'',temperatureMin: 0,temperatureMax: 0			      			
+		      	}],
+		      	[{
+		      		dayTime:'',icon:'',temperatureMin: 0,temperatureMax: 0			      			
+		      	}],
+		      	[{
+		      		dayTime:'',icon:'',temperatureMin: 0,temperatureMax: 0			      			
+		      	}],
+		      	[{
+		      		dayTime:'',icon:'',temperatureMin: 0,temperatureMax: 0			      			
+		      	}],
+		      	[{
+		      		dayTime:'',icon:'',temperatureMin: 0,temperatureMax: 0			      			
+		      	}],
+		      	[{
+		      		dayTime:'',icon:'',temperatureMin: 0,temperatureMax: 0			      			
+		      	}],
+		      	[{
+		      		dayTime:'',icon:'',temperatureMin: 0,temperatureMax: 0			      			
+		      	}]
+		      ],		      
 		      wetherDay: [],
 		      wetherDailyForecast:{},
 		      resource: null
@@ -142,7 +197,7 @@
 				        	this.forecast[i] = [
 				        		{
 					        		dayTime: this.wetherDay[i],
-					        		icon: this.wether.daily.data[i].icon,
+					        		icon: imgPath + this.wether.daily.data[i].icon + '.png',
 					        		temperatureMin: ((this.wether.daily.data[i].temperatureMin - 32) * 5/9).toFixed(1),
 					        		temperatureMax: ((this.wether.daily.data[i].temperatureMax - 32) * 5/9).toFixed(1)
 				        	}]
@@ -215,4 +270,12 @@
 	 .data-list-cont .data.__big{
 	 	font-size: 80px;
 	 }
+	 .img-small-cont{
+	 	width: 50px;
+	 }
+	 .img-small-cont img {
+	 	width: 100%;
+	 }
+
+	 .daily {}
 </style>
