@@ -80,6 +80,12 @@
 				</div>			
 			</div>
 		</div>
+		<div class="row" id="daily">
+			{{wetherDay}}
+
+
+
+		</div>
 	</div>	
 </template>
 
@@ -102,11 +108,22 @@
 		      		summary:''
 		      	}
 		      },
-		      wetherDay: {},
+		      forecast:{},		      
+		      wetherDay: [],
+		      wetherDailyForecast:{},
 		      resource: null
 		    }
 		},
-		methods:{
+		methods:{			
+		    dataTranform(str){
+				var a = new Date(str * 1000);
+				var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+				var year = a.getFullYear();
+				var month = months[a.getMonth()];
+				var date = a.getDate();
+				var time = date + ' ' + month + ' ' + year;
+				return time;
+			},		
 		    getForecastComponent(){
 		    	this.hidden = !this.hidden;
 		    	const latitude = this.$route.query.latitude;
@@ -119,9 +136,19 @@
 			        .then(wether => {
 			          	this.wether = wether;
 				        this.wetherIconName = imgPath + this.wether.currently.icon + '.png';  
-				        this.wetherDay = this.wether.daily;
+				        for (var i = 0; i <= (this.wether.daily.data).length - 1; i++) {
+				        	this.wetherDailyForecast = this.wether.daily.data[i];
+				        	this.wetherDay[i] = this.dataTranform(this.wether.daily.data[i].time); 
+				        	this.forecast[i] = [
+				        		{
+					        		dayTime: this.wetherDay[i],
+					        		icon: this.wether.daily.data[i].icon,
+					        		temperatureMin: ((this.wether.daily.data[i].temperatureMin - 32) * 5/9).toFixed(1),
+					        		temperatureMax: ((this.wether.daily.data[i].temperatureMax - 32) * 5/9).toFixed(1)
+				        	}]
+				        }
+				        console.log(this.forecast);
 				        this.hidden = !this.hidden;
-				        console.log(this.wetherDay);
 			        });
 		    }
 		},
