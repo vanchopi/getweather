@@ -82,39 +82,42 @@
 		</div>
 
 		
-		<div class="row daily pt-3" 
-		     v-for="(item, index) of forecast"
-		     >
-			<div class="col-md-4">
-				<div class="wrapper">
-					<div class="data-cont">
-						<div class="data-list-cont">
-							{{item[0].dayTime}}
+		<div class="row daily pt-5">
+		    <div 
+		    	class="daily-forecast-wrapper"
+		    	v-for="(item, index) of forecast"
+		    	>
+				<div class="col-md-4 col-sm-4 col-lg-12">
+					<div class="wrapper">
+						<div class="data-cont">
+							<div class="data-list-cont daily-time">
+								{{item[0].dayTime}}
+							</div>
+						</div>
+					</div>
+				</div>	
+				<div class="col-md-4 col-sm-4 col-lg-12">
+					<div class="wrapper">
+						<div class="data-cont">
+							<div class="data-list-cont daily-icon">
+								<div class="img-small-cont">
+									<img :src="item[0].icon">	
+								</div>	
+							</div>
+						</div>
+					</div>
+				</div>	
+				<div class="col-md-4 col-sm-4 col-lg-12">
+					<div class="wrapper">
+						<div class="data-cont">
+							<div class="data-list-cont daily-temperature">
+								<div class="min">{{item[0].temperatureMin}}</div>
+								<div class="max">{{item[0].temperatureMax}}</div>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>	
-			<div class="col-md-4">
-				<div class="wrapper">
-					<div class="data-cont">
-						<div class="data-list-cont">
-							<div class="img-small-cont">
-								<img :src="item[0].icon">	
-							</div>	
-						</div>
-					</div>
-				</div>
-			</div>	
-			<div class="col-md-4">
-				<div class="wrapper">
-					<div class="data-cont">
-						<div class="data-list-cont">
-							<span class="min">{{item[0].temperatureMin}} / </span>
-							<span class="max">{{item[0].temperatureMax}}</span>
-						</div>
-					</div>
-				</div>
-			</div>				
+			</div>					
 		</div>
 	</div>	
 </template>
@@ -277,5 +280,34 @@
 	 	width: 100%;
 	 }
 
-	 .daily {}
+	 .daily {
+
+	 }
+	 .daily .daily-forecast-wrapper{
+	 	display: inline-block;
+	 	width: 12.5%;
+	 }
+
+	 .daily .daily-forecast-wrapper .data-cont .min,
+	 .daily .daily-forecast-wrapper .data-cont .max{
+	 	width: 50px;
+	    text-align: center;
+	    height: 25px;
+	    color: white;
+	    background-color: black;
+	    border-radius: 7px;
+	 }
+	 .daily .daily-forecast-wrapper .data-cont .data-list-cont .max{
+	 	margin-top: 5px;
+	 	background-color: white;
+	 	color: black;
+	 }
+	 .daily .daily-forecast-wrapper .data-cont .data-list-cont.daily-time{
+	 	margin-bottom: 5px;
+	 	text-align: center;
+	 }
+	 .daily .daily-forecast-wrapper .data-cont .data-list-cont.daily-icon
+	 {
+	 	margin-bottom: 5px;
+	 }
 </style>
