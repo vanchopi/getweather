@@ -97,7 +97,7 @@
 					</div>
 				</div>	
 				<div class="col-md-4 col-sm-4 col-lg-12">
-					<div class="wrapper">
+					<div class="wrapper __daily-icon">
 						<div class="data-cont">
 							<div class="data-list-cont daily-icon">
 								<div class="img-small-cont">
@@ -309,5 +309,8 @@
 	 .daily .daily-forecast-wrapper .data-cont .data-list-cont.daily-icon
 	 {
 	 	margin-bottom: 5px;
+	 }
+	 .daily .daily-forecast-wrapper .wrapper.__daily-icon{
+	 	min-height: 55px;
 	 }
 </style>
