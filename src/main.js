@@ -8,12 +8,15 @@ Vue.use(VueRouter)
 
 Vue.use(VueResource)
 
-Vue.http.options.root = 'https://api.darksky.net/forecast/53dbf25ba49514eff6ccd794e04da9ae/'
+Vue.http.options.root = 'https://cors-anywhere.herokuapp.com/https://api.darksky.net/forecast/53dbf25ba49514eff6ccd794e04da9ae/'
+/*
+ 	*** origin request -https://api.darksky.net/forecast/53dbf25ba49514eff6ccd794e04da9ae/ ***
+*/
 
-Vue.http.interceptors.push(request => {
-	/*request.headers.set('Access-Control-Allow-Origin', 'http://localhost:8080')
-	request.headers.set('Access-Control-Allow-Credentials', 'true')*/
-})
+/*Vue.http.interceptors.push((request, next) => {
+  request.headers.set('Access-Control-Allow-Origin', '*')
+  next()
+})*/
 
 new Vue({
   el: '#app',
