@@ -38,7 +38,7 @@
 			</div>	-->
 		</div>
 		<div class="row pt-3">
-			<div class="col-md-3">
+			<div class="col-md-3 col-sm-6 col-6">
 				<div class="wrapper-no-flex">
 					<div class="data-cont">
 						<div class="data-list-cont">
@@ -49,7 +49,7 @@
 					</div>
 				</div>			
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-3 col-sm-6 col-6">
 				<div class="wrapper-no-flex">
 					<div class="data-cont">
 						<div class="data-list-cont">
@@ -59,7 +59,7 @@
 					</div>
 				</div>			
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-3 col-sm-6 col-6">
 				<div class="wrapper-no-flex">
 					<div class="data-cont">
 						<div class="data-list-cont">
@@ -69,7 +69,7 @@
 					</div>
 				</div>			
 			</div>
-			<div class="col-md-3">
+			<div class="col-md-3 col-sm-6 col-6">
 				<div class="wrapper-no-flex">
 					<div class="data-cont">
 						<div class="data-list-cont">
@@ -81,44 +81,45 @@
 			</div>
 		</div>
 
-		
-		<div class="row daily pt-5">
-		    <div 
-		    	class="daily-forecast-wrapper"
-		    	v-for="(item, index) of forecast"
-		    	>
-				<div class="col-md-4 col-sm-4 col-lg-12">
-					<div class="wrapper">
-						<div class="data-cont">
-							<div class="data-list-cont daily-time">
-								{{item[0].dayTime}}
+		<div class="daily-cont">
+			<div class="row daily pt-5">			
+			    <div 
+			    	class="daily-forecast-wrapper"
+			    	v-for="(item, index) of forecast"
+			    	>
+					<div class="col-md-12 col-sm-12 col-lg-12">
+						<div class="wrapper">
+							<div class="data-cont">
+								<div class="data-list-cont daily-time">
+									{{item[0].dayTime}}
+								</div>
+							</div>
+						</div>
+					</div>	
+					<div class="col-md-12 col-sm-12 col-lg-12">
+						<div class="wrapper __daily-icon">
+							<div class="data-cont">
+								<div class="data-list-cont daily-icon">
+									<div class="img-small-cont">
+										<img :src="item[0].icon">	
+									</div>	
+								</div>
+							</div>
+						</div>
+					</div>	
+					<div class="col-md-12 col-sm-12 col-lg-12">
+						<div class="wrapper">
+							<div class="data-cont">
+								<div class="data-list-cont daily-temperature">
+									<div class="min">{{item[0].temperatureMin}}</div>
+									<div class="max">{{item[0].temperatureMax}}</div>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>	
-				<div class="col-md-4 col-sm-4 col-lg-12">
-					<div class="wrapper __daily-icon">
-						<div class="data-cont">
-							<div class="data-list-cont daily-icon">
-								<div class="img-small-cont">
-									<img :src="item[0].icon">	
-								</div>	
-							</div>
-						</div>
-					</div>
-				</div>	
-				<div class="col-md-4 col-sm-4 col-lg-12">
-					<div class="wrapper">
-						<div class="data-cont">
-							<div class="data-list-cont daily-temperature">
-								<div class="min">{{item[0].temperatureMin}}</div>
-								<div class="max">{{item[0].temperatureMax}}</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>					
-		</div>
+				</div>								
+			</div>
+		</div>	
 	</div>	
 </template>
 
@@ -268,49 +269,121 @@
 	}
 	.hidden{
 	    display: none !important;
-	 }
-	 .data-list-cont .data-name.__big,
-	 .data-list-cont .data.__big{
-	 	font-size: 80px;
-	 }
-	 .img-small-cont{
+	}
+	.data-list-cont .data-name.__big,
+	.data-list-cont .data.__big{
+		font-size: 80px;
+	}
+	.img-small-cont{
 	 	width: 50px;
-	 }
-	 .img-small-cont img {
+	}
+	.img-small-cont img {
 	 	width: 100%;
-	 }
+	}
 
-	 .daily {
+	.daily {
 
-	 }
-	 .daily .daily-forecast-wrapper{
+	}
+	.daily .daily-forecast-wrapper{
 	 	display: inline-block;
 	 	width: 12.5%;
-	 }
+	}
 
-	 .daily .daily-forecast-wrapper .data-cont .min,
-	 .daily .daily-forecast-wrapper .data-cont .max{
+	.daily .daily-forecast-wrapper .data-cont .min,
+	.daily .daily-forecast-wrapper .data-cont .max{
 	 	width: 50px;
 	    text-align: center;
 	    height: 25px;
 	    color: white;
 	    background-color: black;
 	    border-radius: 7px;
-	 }
-	 .daily .daily-forecast-wrapper .data-cont .data-list-cont .max{
+	}
+	.daily .daily-forecast-wrapper .data-cont .data-list-cont .max{
 	 	margin-top: 5px;
 	 	background-color: white;
 	 	color: black;
-	 }
-	 .daily .daily-forecast-wrapper .data-cont .data-list-cont.daily-time{
+	}
+	.daily .daily-forecast-wrapper .data-cont .data-list-cont.daily-time{
 	 	margin-bottom: 5px;
 	 	text-align: center;
-	 }
-	 .daily .daily-forecast-wrapper .data-cont .data-list-cont.daily-icon
-	 {
+	}
+	.daily .daily-forecast-wrapper .data-cont .data-list-cont.daily-icon
+	{
 	 	margin-bottom: 5px;
-	 }
-	 .daily .daily-forecast-wrapper .wrapper.__daily-icon{
+	}
+	.daily .daily-forecast-wrapper .wrapper.__daily-icon{
 	 	min-height: 55px;
-	 }
+	}
+	.daily-cont{
+		padding-bottom: 10px;
+		margin-bottom: 10px;
+	}
+	@media  (max-width: 767px){
+		.daily-cont{
+			overflow-x: scroll;
+		}
+		.daily-cont .daily {
+			width: 720px;
+		}
+		.daily-cont::-webkit-scrollbar {
+		  	
+		  	height: 10px;
+		}
+
+		/* Track */
+		.daily-cont::-webkit-scrollbar-track {
+		  	box-shadow: inset 0 0 5px grey; 
+		  	border-radius: 10px;
+		}
+
+		/* Handle */
+		.daily-cont::-webkit-scrollbar-thumb {
+		  	background: #c1c1c1; 
+		  	border-radius: 10px;
+		}
+		.wrapper-no-flex .data-cont .data-list-cont{
+			padding-bottom: 1rem;
+		}
+		.wrapper-no-flex .data-cont .data-list-cont .data-name,
+		.wrapper-no-flex .data-cont .data-list-cont .data{
+			border-bottom: none;
+			display: inline-block;
+			padding-bottom: 0px;
+			padding-top: 0px;
+		}
+		.wrapper-no-flex .data-cont .data-list-cont .data-name::after{
+			content:': ';
+			
+		}
+		.daily-cont .daily.pt-5{
+			padding-top: 1rem!important;
+		}
+	}
+	@media  (max-width: 700px){
+		.wrapper-no-flex .data-cont .data-list-cont .data-name,
+		.wrapper-no-flex .data-cont .data-list-cont .data{
+			border-bottom: none;
+			display: inline-block;
+			padding-bottom: 0px;
+			padding-top: 0px;
+		}
+		.forecastCont .col-sm-6 {
+		    -ms-flex: 0 0 100%;
+		    flex: 0 0 100%;
+		    max-width: 100%;
+		}
+		.wrapper-no-flex .data-cont .data-list-cont .data-name::after{
+			content:': ';
+		}
+	}	
+	@media  (max-width: 350px){
+		.preloader-cont + .row .text-center img{
+			width: 100%;
+    		max-width: 252px;
+		}
+		.data-list-cont .data-name.__big, 
+		.data-list-cont .data.__big{
+			font-size: 45px;
+		}
+	}	
 </style>

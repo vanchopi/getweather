@@ -168,4 +168,15 @@ export default {
     float: right;
     margin-top: 12px;
   }
+  @media (max-width: 767px){
+    .int-cont .container {
+        max-width: 100%;
+    }
+  }  
+  @media  (max-width: 450px){
+    .city-name {
+        float: none;
+        display: block;
+    }
+  }
 </style>
