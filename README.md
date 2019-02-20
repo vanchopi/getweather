@@ -1,4 +1,4 @@
-# getwether
+# getweather
 
 > A Vue.js project
 
