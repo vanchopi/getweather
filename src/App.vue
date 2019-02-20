@@ -11,6 +11,7 @@
             class="form-control" 
             aria-label="Sizing example input" 
             aria-describedby="inputGroup-sizing-default"
+            placeholder="Saint Petersburg" 
             id="city"
             v-model="city"
             >
