@@ -13,8 +13,10 @@
             aria-describedby="inputGroup-sizing-default"
             placeholder="Saint Petersburg" 
             id="city"
+            @keyup = "searchPrediction()"
             v-model="city"
             >
+            {{searchCity}}
           </div>  
         </div>  
         <div class="hidden">
@@ -96,7 +98,8 @@ export default {
         ]
       }
       ,
-      city: ''
+      city: '',
+      searchCity:{}
     }
   },
   methods:{
@@ -122,6 +125,17 @@ export default {
          })
 
          
+    },
+    searchPrediction(){
+      var cityStr = 'http://www.mapquestapi.com/search/v3/prediction?key=F9rFHk242FvWMVGiNgGhP7KgTkkbSAJL&limit=5&collection=adminArea,address&q=' +  this.city 
+      this.$http.get(cityStr)
+        .then(response =>{
+          return response.json()
+        })
+        .then(searchCity => {
+          this.searchCity = searchCity;
+          console.log('city - ',this.searchCity);
+        })  
     }
   }
   
