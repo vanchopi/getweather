@@ -127,7 +127,10 @@ export default {
          
     },
     searchPrediction(){
-      var cityStr = 'http://www.mapquestapi.com/search/v3/prediction?key=F9rFHk242FvWMVGiNgGhP7KgTkkbSAJL&limit=5&collection=adminArea,address&q=' +  this.city 
+      /*http://open.mapquestapi.com/nominatim/v1/search.php?format=json&addressdetails=1&limit=10&key=F9rFHk242FvWMVGiNgGhP7KgTkkbSAJL&q=
+      http://www.mapquestapi.com/search/v3/prediction?key=F9rFHk242FvWMVGiNgGhP7KgTkkbSAJL&limit=5&collection=adminArea,address&q=*/
+
+      var cityStr = 'http://open.mapquestapi.com/nominatim/v1/search.php?format=json&addressdetails=1&limit=10&key=F9rFHk242FvWMVGiNgGhP7KgTkkbSAJL&q=' +  this.city 
       this.$http.get(cityStr)
         .then(response =>{
           return response.json()
