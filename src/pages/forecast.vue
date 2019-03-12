@@ -1,5 +1,5 @@
 <template>
-	<div>
+	<div class="wrp">
 		<div 
 		class="preloader-cont"
 		:class="{'hidden': !hidden}"
@@ -228,6 +228,9 @@
 		height: 100%;
 		width: 100%;
 	}
+	.wrp{
+		position: relative;
+	}
 	.wrapper-no-flex{
 		display: block;		
 	}
@@ -319,6 +322,15 @@
 		margin-bottom: 10px;
 	}
 	@media  (max-width: 767px){
+		.preloader-cont {
+		    position: fixed;
+		    background-color: rgba(212, 200, 200, 0.6);
+		    width: 100%;
+		    height: 100%;
+		    z-index: 10;
+		    top: 0;
+		    left: 0;
+		}
 		.daily-cont{
 			overflow-x: scroll;
 		}
