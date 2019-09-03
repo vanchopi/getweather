@@ -83,15 +83,16 @@
 
 		<div class="daily-cont">
 			<div class="row daily pt-5">			
+				
 			    <div 
 			    	class="daily-forecast-wrapper"
-			    	v-for="(item, index) of forecast"
+			    	v-for="(item, index) of getLongForcast()"
 			    	>
 					<div class="col-md-12 col-sm-12 col-lg-12">
 						<div class="wrapper">
 							<div class="data-cont">
 								<div class="data-list-cont daily-time">
-									{{item[0].dayTime}}
+									{{item.dayTime}}
 								</div>
 							</div>
 						</div>
@@ -101,7 +102,7 @@
 							<div class="data-cont">
 								<div class="data-list-cont daily-icon">
 									<div class="img-small-cont">
-										<img :src="item[0].icon">	
+										<img :src="item.icon">	
 									</div>	
 								</div>
 							</div>
@@ -111,13 +112,14 @@
 						<div class="wrapper">
 							<div class="data-cont">
 								<div class="data-list-cont daily-temperature">
-									<div class="min">{{item[0].temperatureMin}}</div>
-									<div class="max">{{item[0].temperatureMax}}</div>
+									<div class="min">{{item.temperatureMin}}</div>
+									<div class="max">{{item.temperatureMax}}</div>
 								</div>
 							</div>
 						</div>
 					</div>
-				</div>								
+				</div>
+												
 			</div>
 		</div>	
 	</div>	
@@ -143,7 +145,7 @@
 		      	}
 		      },
 		      forecast:[
-		      	[{
+		      	/*[{
 		      		dayTime:'',icon:'',temperatureMin: 0,temperatureMax: 0			      			
 		      	}],
 		      	[{
@@ -166,7 +168,7 @@
 		      	}],
 		      	[{
 		      		dayTime:'',icon:'',temperatureMin: 0,temperatureMax: 0			      			
-		      	}]
+		      	}]*/
 		      ],		      
 		      wetherDay: [],
 		      wetherDailyForecast:{},
@@ -182,13 +184,17 @@
 				var date = a.getDate();
 				var time = date + ' ' + month + ' ' + year;
 				return time;
-			},		
+			},	
+			getLongForcast(){
+				return this.forecast;
+			},
 		    getForecastComponent(){
 		    	this.hidden = !this.hidden;
 		    	const latitude = this.$route.query.latitude;
 				const longitude = this.$route.query.longitude;
 				var str = latitude + ',' + longitude;
-				var imgPath = "/src/assets/images/wether-icons/"
+				var imgPath = "/src/assets/images/wether-icons/";
+				this.forecast = [];
 			    this.resource = this.$resource(str);
 			    console.log('created1')
 			    this.resource.get().then(response => response.json())
@@ -198,13 +204,13 @@
 				        for (var i = 0; i <= (this.wether.daily.data).length - 1; i++) {
 				        	this.wetherDailyForecast = this.wether.daily.data[i];
 				        	this.wetherDay[i] = this.dataTranform(this.wether.daily.data[i].time); 
-				        	this.forecast[i] = [
+				        	this.forecast.push( 
 				        		{
 					        		dayTime: this.wetherDay[i],
 					        		icon: imgPath + this.wether.daily.data[i].icon + '.png',
 					        		temperatureMin: ((this.wether.daily.data[i].temperatureMin - 32) * 5/9).toFixed(1),
 					        		temperatureMax: ((this.wether.daily.data[i].temperatureMax - 32) * 5/9).toFixed(1)
-				        	}]
+				        		});				        	
 				        }
 				        console.log(this.forecast);
 				        this.hidden = !this.hidden;
@@ -242,6 +248,7 @@
 		border-bottom: 1px solid #c1c1c1;
 		text-align: center;
 		font-size: 21px;
+		font-weight: 500;
 	}
 	.wrapper-no-flex .data-cont .data-list-cont .data{
 		padding-top: 1rem;
