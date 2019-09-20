@@ -59,7 +59,7 @@
         <span>{{cityCoords.results[0].locations[0].latLng}}</span>
         <hr>-->
         <div class="forecastCont">          
-            <router-view></router-view>           
+            <router-view :onCityNameChange='onCityNameChange'></router-view>           
         </div>  
 
 
@@ -106,8 +106,8 @@ export default {
       this.$http.get(cityName)
         .then(response => {
           return response.json()
-         })
-          .then(cityCoords => {
+        })
+        .then(cityCoords => {
           this.cityCoords = cityCoords;
           if (this.cityCoords.results[0].locations[0].adminArea5 != ''){
               this.cityStrName = this.cityCoords.results[0].locations[0].adminArea5 + ', ' + this.cityCoords.results[0].locations[0].adminArea3 + ', ' + this.cityCoords.results[0].locations[0].adminArea1;  
@@ -118,10 +118,16 @@ export default {
             } else{
               this.$router.push({name: '404'});
               this.cityStrName = "Can't find city '" + this.city +"'";
+              this.$store.dispatch("cityName/setCityName", this.cityStrName);
             }               
-          })
-      }
+        })
+    },
+    onCityNameChange(data){
+      this.cityStrName = data;
+      return this.cityStrName;
+    }
   }
+
   
 }
 </script>

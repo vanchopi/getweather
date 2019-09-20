@@ -113,6 +113,7 @@
 
 <script type="text/javascript">
 	export default{
+		props:['onCityNameChange'],
 		data () {
 		    return {
 		      name: '',
@@ -157,7 +158,7 @@
 				var imgPath = "/src/assets/images/wether-icons/";
 				this.forecast = [];
 			    this.resource = this.$resource(str);
-			    console.log(' city - ',this.$store.state.cityName.cityNameStr);
+			    this.onCityNameChange(this.$store.state.cityName.cityNameStr);
 			    this.resource.get().then(response => response.json())
 			        .then(wether => {
 			          	this.wether = wether;
@@ -173,7 +174,7 @@
 					        		temperatureMax: ((this.wether.daily.data[i].temperatureMax - 32) * 5/9).toFixed(1)
 				        		});				        	
 				        }
-				        console.log(this.forecast);
+				        //console.log(this.forecast);
 				        this.hidden = !this.hidden;
 			        });
 		    }
