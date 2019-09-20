@@ -1,11 +1,14 @@
+import Cookies from 'js-cookie';
 
 const state = {
-    cityNameStr: '',    
+    cityNameStr: (Cookies.get('cityName')).length > 0 ? Cookies.get('cityName') : '',    
 };
 
 const mutations = {
 	SET_NAME: ( state, cityName ) => {
 		state.cityNameStr = cityName;
+		Cookies.set('cityName', state.cityNameStr);
+		console.log('---',Cookies.get('cityName'));
 	}
 };
 

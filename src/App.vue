@@ -101,29 +101,26 @@ export default {
   },
   methods:{
     getCoordinates(val){
-      console.log(val);
+      //console.log(val);
       var cityName = 'http://open.mapquestapi.com/geocoding/v1/address?key=F9rFHk242FvWMVGiNgGhP7KgTkkbSAJL&location=' + val;      
-      const self = this;
-      self.$http.get(cityName)
+      this.$http.get(cityName)
         .then(response => {
           return response.json()
          })
-         .then(cityCoords => {
-          self.cityCoords = cityCoords// наш пустой массив;
-          if (self.cityCoords.results[0].locations[0].adminArea5 != ''){
-              self.cityStrName = self.cityCoords.results[0].locations[0].adminArea5 + ', ' + self.cityCoords.results[0].locations[0].adminArea3 + ', ' + self.cityCoords.results[0].locations[0].adminArea1;  
-              self.$store.dispatch("cityName/setCityName", self.cityStrName);
-              self.latitude = self.cityCoords.results[0].locations[0].latLng.lat;
-              self.longitude = self.cityCoords.results[0].locations[0].latLng.lng;
+          .then(cityCoords => {
+          this.cityCoords = cityCoords;
+          if (this.cityCoords.results[0].locations[0].adminArea5 != ''){
+              this.cityStrName = this.cityCoords.results[0].locations[0].adminArea5 + ', ' + this.cityCoords.results[0].locations[0].adminArea3 + ', ' + this.cityCoords.results[0].locations[0].adminArea1;  
+              this.$store.dispatch("cityName/setCityName", this.cityStrName);
+              this.latitude = this.cityCoords.results[0].locations[0].latLng.lat;
+              this.longitude = this.cityCoords.results[0].locations[0].latLng.lng;
               this.$router.push({name: 'forecast', query:{latitude: this.latitude, longitude: this.longitude}})
             } else{
               this.$router.push({name: '404'});
-              self.cityStrName = "Can't find city '" + this.city +"'";
+              this.cityStrName = "Can't find city '" + this.city +"'";
             }               
-         })
-
-         
-    }
+          })
+      }
   }
   
 }

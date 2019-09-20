@@ -157,7 +157,7 @@
 				var imgPath = "/src/assets/images/wether-icons/";
 				this.forecast = [];
 			    this.resource = this.$resource(str);
-			    console.log('created1')
+			    console.log(' city - ',this.$store.state.cityName.cityNameStr);
 			    this.resource.get().then(response => response.json())
 			        .then(wether => {
 			          	this.wether = wether;
@@ -180,7 +180,7 @@
 		},
 		watch:{
 			'$route'(){
-		    	this.getForecastComponent()
+		    	this.getForecastComponent();		    			    	
 		    } 
 		},
 		created(){			
@@ -221,12 +221,13 @@
 		margin: auto;
 	}
 	.preloader-cont{
-		position: absolute;
-		width: 100%;
-		height: 100%;
-		z-index: 10;
-		/*background: white;
-    	opacity: 0.5;*/
+		position: fixed;
+	    background-color: rgba(232, 232, 232, 0.6);
+	    width: 100%;
+	    height: 100%;
+	    z-index: 10;
+	    top: 0;
+	    left: 0;
 	}
 	.preloader-cont .preloader{
 		position: absolute;
@@ -292,7 +293,7 @@
 	@media  (max-width: 767px){
 		.preloader-cont {
 		    position: fixed;
-		    background-color: rgba(212, 200, 200, 0.6);
+		    background-color: rgba(232, 232, 232, 0.6);
 		    width: 100%;
 		    height: 100%;
 		    z-index: 10;
