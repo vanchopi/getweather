@@ -1,6 +1,6 @@
 import VueRouter from 'vue-router'
-import Forecast from './pages/Forecast'
-import ErrorCmp from './pages/404'
+import Forecast from './components/Forecast'
+import ErrorCmp from './components/404'
 
 export default new VueRouter({
 	routes:[

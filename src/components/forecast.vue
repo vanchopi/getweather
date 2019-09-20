@@ -21,21 +21,7 @@
 						</div>						
 					</div>
 				</div>	
-			</div>
-			
-			<!--<div>
-				<span>
-					latitude: {{ $route.query.latitude }}
-				</span>
-				<span>
-					longitude: {{ $route.query.longitude }}
-				</span>
-			</div>
-			<div >
-				
-				<br>
-				{{((wether.currently.temperature - 32) * 5/9).toFixed(1)}}
-			</div>	-->
+			</div>			
 		</div>
 		<div class="row pt-3">
 			<div class="col-md-3 col-sm-6 col-6">
@@ -144,32 +130,7 @@
 		      		summary:''
 		      	}
 		      },
-		      forecast:[
-		      	/*[{
-		      		dayTime:'',icon:'',temperatureMin: 0,temperatureMax: 0			      			
-		      	}],
-		      	[{
-		      		dayTime:'',icon:'',temperatureMin: 0,temperatureMax: 0			      			
-		      	}],
-		      	[{
-		      		dayTime:'',icon:'',temperatureMin: 0,temperatureMax: 0			      			
-		      	}],
-		      	[{
-		      		dayTime:'',icon:'',temperatureMin: 0,temperatureMax: 0			      			
-		      	}],
-		      	[{
-		      		dayTime:'',icon:'',temperatureMin: 0,temperatureMax: 0			      			
-		      	}],
-		      	[{
-		      		dayTime:'',icon:'',temperatureMin: 0,temperatureMax: 0			      			
-		      	}],
-		      	[{
-		      		dayTime:'',icon:'',temperatureMin: 0,temperatureMax: 0			      			
-		      	}],
-		      	[{
-		      		dayTime:'',icon:'',temperatureMin: 0,temperatureMax: 0			      			
-		      	}]*/
-		      ],		      
+		      forecast:[],		      
 		      wetherDay: [],
 		      wetherDailyForecast:{},
 		      resource: null
