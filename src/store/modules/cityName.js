@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 
 const state = {
-    cityNameStr: (Cookies.get('cityName')).length > 0 ? Cookies.get('cityName') : '',    
+    cityNameStr: /*(Cookies.get('cityName')).length > 0*/  document.cookie.indexOf('cityName') != -1 ? Cookies.get('cityName') : ''    
 };
 
 const mutations = {
